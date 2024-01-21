@@ -14,21 +14,25 @@ export default function DailyTasks() {
   };
 
   return (
-    <div>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} className='ml-2 mr-2 mt-5'>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3bh-content"
-          id="panel3bh-header"
-        >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>Günlük Gelen İşlemler</Typography>
-        </AccordionSummary>
-        <AccordionDetails className=''>
-          <Typography>
-            <DailyTaksData />
-          </Typography>
-        </AccordionDetails>
-      </Accordion>  
-    </div>
-  );
+		<div className="md:mx-2">
+			<Accordion
+				expanded={expanded === "panel1"}
+				onChange={handleChange("panel1")}
+				className="mt-5 sm:mt-1">
+				<AccordionSummary
+					expandIcon={<ExpandMoreIcon />}
+					aria-controls="panel3bh-content"
+					id="panel3bh-header">
+					<Typography className="md:w-1/3 flex-shrink-0">
+						Günlük Gelen İşlemler
+					</Typography>
+				</AccordionSummary>
+				<AccordionDetails className="">
+					<Typography>
+						<DailyTaksData />
+					</Typography>
+				</AccordionDetails>
+			</Accordion>
+		</div>
+	);
 }

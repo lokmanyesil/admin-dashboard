@@ -11,19 +11,21 @@ function Settings() {
   };
  
   return (
-    <Card>
-      <List>
-      <ListItem disablePadding>
-          <ListItemButton component={Link} to="/profileMenu">
-            <ListItemIcon>
-              <AccountCircle />
-            </ListItemIcon>
-            <ListItemText primary="Hesabım" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Card>
-  );
+		<Card className="mt-2 sm:mt-0">
+			<List>
+				<ListItem disablePadding>
+					<ListItemButton
+						component={Link}
+						to="/profileMenu">
+						<ListItemIcon>
+							<AccountCircle />
+						</ListItemIcon>
+						<ListItemText primary="Hesabım" />
+					</ListItemButton>
+				</ListItem>
+			</List>
+		</Card>
+	);
 }
 
 export default Settings;

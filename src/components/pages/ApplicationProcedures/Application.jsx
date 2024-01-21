@@ -73,7 +73,6 @@ const Application = () => {
 	return (
 		<div className="w-full mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
 			<h1 className="text-2xl font-bold mb-6">Yeni Başvuru</h1>
-
 			<form onSubmit={formik.handleSubmit}>
 				<div className="mb-4">
 					<FormControl fullWidth>
