@@ -1,38 +1,38 @@
-import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DailyTaksData from './DailyTaksData';
+import React, { useState } from "react";
+import DailyTaksData from "./DailyTaksData";
+import TablePagination from "@mui/material/TablePagination";
 
 export default function DailyTasks() {
-  const [expanded, setExpanded] = React.useState("panel1");
+	const [page, setPage] = useState(0);
+	const [rowsPerPage, setRowsPerPage] = useState(10); // Varsayılan satır sayısı
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+	const handleChangePage = (event, newPage) => {
+		setPage(newPage);
+	};
 
-  return (
-		<div className="md:mx-2">
-			<Accordion
-				expanded={expanded === "panel1"}
-				onChange={handleChange("panel1")}
-				className="mt-5 sm:mt-1">
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel3bh-content"
-					id="panel3bh-header">
-					<Typography className="md:w-1/3 flex-shrink-0">
-						Günlük Gelen İşlemler
-					</Typography>
-				</AccordionSummary>
-				<AccordionDetails className="">
-					<Typography>
-						<DailyTaksData />
-					</Typography>
-				</AccordionDetails>
-			</Accordion>
+	const handleChangeRowsPerPage = (event) => {
+		const newRowsPerPage = +event.target.value;
+		setRowsPerPage(newRowsPerPage);
+		setPage(0); // Yeni sayfa, 0. sayfaya geri dön
+	};
+	return (
+		<div>
+			<DailyTaksData
+				page={page}
+				rowsPerPage={rowsPerPage}
+				onPageChange={handleChangePage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
+			<TablePagination
+				className="mb-5"
+				rowsPerPageOptions={[10, 25, 50, 100]} // Kullanıcıya sunulan seçenekler
+				component="div"
+				count={100} // Toplam öğe sayısı, gerçek veriye göre güncellenmelidir
+				rowsPerPage={rowsPerPage}
+				page={page}
+				onPageChange={handleChangePage}
+				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
 		</div>
 	);
 }

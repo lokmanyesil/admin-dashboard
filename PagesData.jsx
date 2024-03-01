@@ -12,8 +12,8 @@ const pages = [
 	},
 	{
 		id: 2,
-		url: "/application",
-		name: "Başvuru İşlemleri",
+		url: "/NewSale",
+		name: "Yeni Satış",
 		target: "_self",
 		active: true,
 		icon: <NewspaperIcon className="h-5 w-5" />,

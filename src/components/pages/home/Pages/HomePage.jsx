@@ -8,9 +8,9 @@ const HomePage = () => {
 		<div className=" overflow-hidden mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl">
 			<div className="mt-4">
 				<div>{/* <Dashboard/> */}</div>
-				<div className="mt-4">
+				{/* <div className="mt-4">
 					<Acordions />
-				</div>
+				</div> */}
 				<div className="mt-4">
 					<MyChart />
 				</div>

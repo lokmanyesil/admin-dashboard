@@ -8,8 +8,10 @@ import {
 	Typography,
 	Container,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		username: "",
 		email: "",
@@ -25,7 +27,27 @@ const SignUp = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Form submitted with data:", formData);
+		const response = fetch("http://127.0.0.1:8000/add_user", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				user_name: formData.username,
+				user_surname: formData.email,
+				user_mail: formData.email,
+				user_password: formData.password,
+			}),
+		}).then((response) => {
+			if (response.ok) {
+				setTimeout(() => {
+					navigate("/");
+				}, 2000);
+			}
+			return response.json();
+		});
+
 		// Burada kayıt işlemleri yapılabilir
 	};
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { carPriceData as data } from "../../data/mockData";
+import GetProcess from "../../../../services/getProcess";
 
 const MyChart = () => {
 	const [chartData, setChartData] = useState([]);
-	useEffect(() => {
+	const [data1, setData] = useState([]); //api için
+	/* useEffect(() => {
 		// Verileri uygun formata dönüştür
 		const formattedData = data.map(({ name, price }) => [
 			name,
@@ -13,6 +15,24 @@ const MyChart = () => {
 		// Başlık ve verileri içeren dizi
 		const chartArray = [["Car", "Price"], ...formattedData];
 		setChartData(chartArray);
+	}, []); */
+
+	useEffect(() => {
+		const process = new GetProcess();
+		process.getProcess().then((response) => {
+			setData(response);
+			// Veriyi grafik için uygun formata dönüştür
+			const formattedData = response.map(({ customer_name, process_name }) => [
+				process_name,
+				customer_name.length, // Müşteri adının uzunluğunu kullanarak bir ölçüm alalım
+			]);
+			// Grafik için başlık ve verileri içeren dizi
+			const chartArray = [
+				["Process", "Customer Name Length"],
+				...formattedData,
+			];
+			setChartData(chartArray);
+		});
 	}, []);
 
 	return (
@@ -26,7 +46,7 @@ const MyChart = () => {
 					key={data.id}
 					data={chartData}
 					options={{
-						title: "Araba Fiyat Grafiği",
+						title: "Ürün Adı ve Fiyat Grafiği",
 						backgroundColor: "transparent",
 					}}
 					rootProps={{ "data-testid": "1" }}
@@ -41,7 +61,7 @@ const MyChart = () => {
 					key={data.id}
 					data={chartData}
 					options={{
-						title: "Araba Fiyat Grafiği",
+						title: "Ürün Adı ve Fiyat Grafiği",
 						backgroundColor: "transparent",
 						is3D: true,
 					}}
@@ -57,7 +77,7 @@ const MyChart = () => {
 					key={data.id}
 					data={chartData}
 					options={{
-						title: "Araba Fiyat Grafiği",
+						title: "Ürün Adı ve Fiyat Grafiği",
 						backgroundColor: "transparent",
 					}}
 					rootProps={{ "data-testid": "1" }}
